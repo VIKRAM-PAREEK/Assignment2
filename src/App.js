@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
 
 class App extends React.Component{
   constructor(props){
@@ -37,10 +37,11 @@ class App extends React.Component{
 
             <Grid
              container
-             direction="row"
+             direction="column"
              justify="center"
              alignItems="center"
             >
+             
               <form id="todo-form"> 
                 <TextField id="outlined-basic" variant="outlined"
                     value = {this.state.todoitem}
@@ -49,17 +50,22 @@ class App extends React.Component{
                     placeholder="To Do"
                     required 
                 />
-              </form>
-              <Button 
-                  variant="contained" 
-                  color="primary" 
-                  onClick={ (item)=>this.addToList(this.state.todoitem)} >
-                    ADD
+                <TextField
+                    id="date"
+                    label="Due Date"
+                    type="date"
+                    defaultValue="2020-02-22"
+                />
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={ (item)=>this.addToList(this.state.todoitem)} >
+                      ADD
                 </Button>
-                <ul>
+                <List>
                   {this.state.list.map( (val)=><li>{val}</li>)}
-                </ul>
-
+                </List>
+              </form>
             </Grid>        
       );
   }
