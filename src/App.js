@@ -1,9 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-
+import { Button, Grid, AppBar, TextField, List, Typography } from '@material-ui/core';
+//import Typography from '@material-ui/core/Typography';
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -34,15 +31,20 @@ class App extends React.Component{
   }
   render(){
     return(
-
-            <Grid
-             container
-             direction="column"
-             justify="center"
-             alignItems="center"
+          
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing= {4}
             >
-             
-              <form id="todo-form"> 
+            <AppBar color="secondary">
+              <Typography variant='h7' align='center'>TO DO LIST
+              </Typography>
+            </AppBar>
+            
+              <Grid item>
                 <TextField id="outlined-basic" variant="outlined"
                     value = {this.state.todoitem}
                     onChange={ (e)=>this.handleUserInput(e.target.value)}
@@ -50,22 +52,33 @@ class App extends React.Component{
                     placeholder="To Do"
                     required 
                 />
+              </Grid>
+              <Grid item>
                 <TextField
                     id="date"
                     label="Due Date"
                     type="date"
                     defaultValue="2020-02-22"
                 />
+              </Grid>
+              <Grid item>
                 <Button 
                     variant="contained" 
                     color="primary" 
                     onClick={ (item)=>this.addToList(this.state.todoitem)} >
                       ADD
                 </Button>
-                <List>
-                  {this.state.list.map( (val)=><li>{val}</li>)}
-                </List>
-              </form>
+              </Grid>
+             <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+             > 
+              <List>
+                {this.state.list.map( (val)=><li>{val}</li>)}
+              </List>
+              </Grid>
             </Grid>        
       );
   }
