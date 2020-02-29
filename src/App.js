@@ -80,18 +80,22 @@ class App extends React.Component{
                     onClick={ (item)=>this.addToList(this.state.todoitem)} >
                       ADD
                 </Button>
-                <Grid
-                  container
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                >
-                <Display
-                  handleDelete={this.handleDelete.bind(this)}
-                  list={this.state.list}/>
               </Grid>
-            </Grid>
-          </Grid>        
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                  <List>
+                    <ListItemText>
+                      <Display
+                        handleDelete={this.handleDelete.bind(this)}
+                        list={this.state.list}/>
+                    </ListItemText>
+                  </List>
+                </Grid>
+                </Grid>
       );
   }
 }
