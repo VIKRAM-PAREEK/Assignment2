@@ -7,6 +7,7 @@ class App extends React.Component{
 
     this.state={
       todoitem: '',
+      description: '',
       list: []
     }
   }
@@ -17,16 +18,22 @@ class App extends React.Component{
       todoitem: item
     });
   }  
-
+  handleDescription(item){
+    this.setState({
+      description: item
+    });
+  }  
   //functionality of button i.e adding todo items
-  addToList(item){
+  addToList(todo, des){
     
+    var item= todo+" "+des;
     let listArray = this.state.list; //creating a list and storing current todoitem values
     listArray.push(item);
 
     this.setState({
       list: listArray, //storing the todo items in the main list
-      todoitem: ''    //Initialising the todoitem in the textbox as empty again
+      todoitem: '',
+      description: ''    //Initialising the todoitem in the textbox as empty again
     });
   }
 
@@ -55,13 +62,26 @@ class App extends React.Component{
               <Typography variant='h7' align='center'>TO DO LIST
               </Typography>
             </AppBar>
-          
+          <Grid Item>
+            <Typography variant='h7' align='center'>Welcome ,Here you can manage your Daily To-Do's. 
+              Just enter your To Do items and add them, once you complete them Delete your list item by clicking on them.
+            </Typography>
+          </Grid>
             <Grid item>
                 <TextField id="outlined-basic" variant="outlined"
                     value = {this.state.todoitem}
                     onChange={ (e)=>this.handleUserInput(e.target.value)}
                     type="text"
                     placeholder="To Do"
+                    required 
+                />
+              </Grid>
+              <Grid item>
+                <TextField id="outlined-basic" variant="outlined"
+                    value = {this.state.description}
+                    onChange={ (e)=>this.handleDescription(e.target.value)}
+                    type="text"
+                    placeholder="Description"
                     required 
                 />
               </Grid>
@@ -77,7 +97,7 @@ class App extends React.Component{
                 <Button 
                     variant="contained" 
                     color="primary" 
-                    onClick={ (item)=>this.addToList(this.state.todoitem)} >
+                    onClick={ (item)=>this.addToList(this.state.todoitem, this.state.description)} >
                       ADD
                 </Button>
               </Grid>
