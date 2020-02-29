@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Grid, AppBar, TextField, List, Typography } from '@material-ui/core';
-//import Typography from '@material-ui/core/Typography';
+import { Button, Grid, AppBar, TextField, List, Typography, ListItemText, ListItemIcon, ListButton } from '@material-ui/core';
+import Display from './Display';
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -29,22 +29,34 @@ class App extends React.Component{
       todoitem: ''    //Initialising the todoitem in the textbox as empty again
     });
   }
+
+  handleDelete(Itemdelete){
+
+    let newItems = this.state.list.filter((_item)=>{
+      return _item !== Itemdelete
+    });
+    this.setState({
+      list: newItems
+    });
+
+  }
   render(){
     return(
           
           <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing= {4}
-            >
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing= {8}
+          padding-top= {100}
+          >
             <AppBar color="secondary">
               <Typography variant='h7' align='center'>TO DO LIST
               </Typography>
             </AppBar>
-            
-              <Grid item>
+          
+            <Grid item>
                 <TextField id="outlined-basic" variant="outlined"
                     value = {this.state.todoitem}
                     onChange={ (e)=>this.handleUserInput(e.target.value)}
@@ -68,18 +80,18 @@ class App extends React.Component{
                     onClick={ (item)=>this.addToList(this.state.todoitem)} >
                       ADD
                 </Button>
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                >
+                <Display
+                  handleDelete={this.handleDelete.bind(this)}
+                  list={this.state.list}/>
               </Grid>
-             <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-             > 
-              <List>
-                {this.state.list.map( (val)=><li>{val}</li>)}
-              </List>
-              </Grid>
-            </Grid>        
+            </Grid>
+          </Grid>        
       );
   }
 }
