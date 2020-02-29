@@ -26,7 +26,8 @@ class App extends React.Component{
   //functionality of button i.e adding todo items
   addToList(todo, des){
     
-    var item= todo+" "+des;
+    if(todo!=='' && des!==''){
+    var item= todo+" ["+des+"]";
     let listArray = this.state.list; //creating a list and storing current todoitem values
     listArray.push(item);
 
@@ -35,6 +36,7 @@ class App extends React.Component{
       todoitem: '',
       description: ''    //Initialising the todoitem in the textbox as empty again
     });
+  }
   }
 
   handleDelete(Itemdelete){
@@ -63,8 +65,8 @@ class App extends React.Component{
               </Typography>
             </AppBar>
           <Grid Item>
-            <Typography variant='h7' align='center'>Welcome ,Here you can manage your Daily To-Do's. 
-              Just enter your To Do items and add them, once you complete them Delete your list item by clicking on them.
+            <Typography variant='h7' align='center'><br/><br/><br/><br/>Welcome ,Here you can manage your Daily To-Do's. 
+              Just enter your To Do items and add them, once you complete them Delete your list items by clicking on them.
             </Typography>
           </Grid>
             <Grid item>
